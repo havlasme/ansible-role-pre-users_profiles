@@ -34,5 +34,5 @@ Created by [Tomáš Havlas](https://github.com/tomashavlas) in 2016.
 
 [galaxy_image]: https://img.shields.io/badge/galaxy-tomashavlas.pre--users_profiles-blue.svg?style=flat
 [galaxy_link]: https://galaxy.ansible.com/tomashavlas/pre-users_profiles/
-[tag_image]: https://img.shields.io/github/tag/tomashavlas/ansible-role-pre-users_profile.svg
+[tag_image]: https://img.shields.io/github/tag/tomashavlas/ansible-role-pre-users_profiles.svg
 [tag_link]: https://github.com/tomashavlas/ansible-role-pre-users_profiles/tags
