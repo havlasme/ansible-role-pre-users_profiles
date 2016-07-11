@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+*Released: Unreleased*
+
+- Enclosed strings into double-quotes instead of single-quotes.
+  [tomashavlas]
+
 v1.0
 ----
 

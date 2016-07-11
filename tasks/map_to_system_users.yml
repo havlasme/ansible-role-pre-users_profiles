@@ -2,38 +2,38 @@
 - name: Map specs to sudo
   set_fact:
     register_system_user:
-      name: '{{ item.name }}'
-      append: '{{ item.append|default(omit) }}'
-      comment: '{{ item.comment|default(omit) }}'
-      createhome: '{{ item.createhome|default(omit) }}'
-      expires: '{{ item.expires|default(omit) }}'
-      generate_ssh_key: '{{ item.generate_ssh_key|default(omit) }}'
-      group: '{{ item.group|default(omit) }}'
-      groups: '{{ item.groups|default(None) }}'
-      home: '{{ item.home|default(omit) }}'
-      home_group: '{{ item.home_group|default(omit) }}'
-      home_mode: '{{ item.home_mode|default(omit) }}'
-      home_owner: '{{ item.home_owner|default(omit) }}'
-      move_home: '{{ item.move_home|default(omit) }}'
-      password: '{{ item.password|default(omit) }}'
-      remove: '{{ item.remove|default(omit) }}'
-      shell: '{{ item.shell|default(omit) }}'
-      skeleton: '{{ item.skeleton|default(omit) }}'
-      ssh_key_bits: '{{ item.ssh_key_bits|default(omit) }}'
-      ssh_key_comment: '{{ item.ssh_key_comment|default(omit) }}'
-      ssh_key_file: '{{ item.ssh_key_file|default(omit) }}'
-      ssh_key_passphrase: '{{ item.ssh_key_passphrase|default(omit) }}'
-      ssh_key_type: '{{ item.ssh_key_type|default(omit) }}'
-      system: '{{ item.system|default(omit) }}'
-      uid: '{{ item.uid|default(omit) }}'
-      update_password: '{{ item.update_password|default(omit) }}'
-      disabled: '{{ item.disabled|default(false) }}'
-  register: 'users_profiles__register_mapped'
+      name: "{{ item.name }}"
+      append: "{{ item.append|default(omit) }}"
+      comment: "{{ item.comment|default(omit) }}"
+      createhome: "{{ item.createhome|default(omit) }}"
+      expires: "{{ item.expires|default(omit) }}"
+      generate_ssh_key: "{{ item.generate_ssh_key|default(omit) }}"
+      group: "{{ item.group|default(omit) }}"
+      groups: "{{ item.groups|default(None) }}"
+      home: "{{ item.home|default(omit) }}"
+      home_group: "{{ item.home_group|default(omit) }}"
+      home_mode: "{{ item.home_mode|default(omit) }}"
+      home_owner: "{{ item.home_owner|default(omit) }}"
+      move_home: "{{ item.move_home|default(omit) }}"
+      password: "{{ item.password|default(omit) }}"
+      remove: "{{ item.remove|default(omit) }}"
+      shell: "{{ item.shell|default(omit) }}"
+      skeleton: "{{ item.skeleton|default(omit) }}"
+      ssh_key_bits: "{{ item.ssh_key_bits|default(omit) }}"
+      ssh_key_comment: "{{ item.ssh_key_comment|default(omit) }}"
+      ssh_key_file: "{{ item.ssh_key_file|default(omit) }}"
+      ssh_key_passphrase: "{{ item.ssh_key_passphrase|default(omit) }}"
+      ssh_key_type: "{{ item.ssh_key_type|default(omit) }}"
+      system: "{{ item.system|default(omit) }}"
+      uid: "{{ item.uid|default(omit) }}"
+      update_password: "{{ item.update_password|default(omit) }}"
+      disabled: "{{ item.disabled|default(false) }}"
+  register: "users_profiles__register_mapped"
   with_items:
-    - '{{ users_profiles__list }}'
+    - "{{ users_profiles__list }}"
   when: (item.name is defined and item.name)
 
 - set_fact:
-    users_profiles__register_system_users: '{{ users_profiles__register_mapped.results
-                                                  |selectattr("ansible_facts", "defined")|list
-                                                  |map(attribute="ansible_facts.register_system_user")|list }}'
+    users_profiles__register_system_users: "{{ users_profiles__register_mapped.results
+                                                  |selectattr('ansible_facts', 'defined')|list
+                                                  |map(attribute='ansible_facts.register_system_user')|list }}"

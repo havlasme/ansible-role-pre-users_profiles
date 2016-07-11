@@ -1,4 +1,4 @@
 ---
-- include: 'map_to_authorized_keys.yml'
-- include: 'map_to_sudo.yml'
-- include: 'map_to_system_users.yml'
+- include: "map_to_authorized_keys.yml"
+- include: "map_to_sudo.yml"
+- include: "map_to_system_users.yml"

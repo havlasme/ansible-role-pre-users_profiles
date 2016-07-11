@@ -2,22 +2,22 @@
 - name: Map users entires to authorized_keys
   set_fact:
     register_authorized_keys:
-      key: '{{ item.1.key|default(item.1) }}'
-      user: '{{ item.0.name }}'
-      exclusive: '{{ item.1.exclusive|default(omit) }}'
-      key_options: '{{ item.1.key_options|default(omit) }}'
-      manage_dir: '{{ item.1.manage_dir|default(omit) }}'
-      disabled: '{{ item.1.disabled|default(item.0.disabled|default(false)) }}'
-  register: 'users_profiles__register_mapped'
+      key: "{{ item.1.key|default(item.1) }}"
+      user: "{{ item.0.name }}"
+      exclusive: "{{ item.1.exclusive|default(omit) }}"
+      key_options: "{{ item.1.key_options|default(omit) }}"
+      manage_dir: "{{ item.1.manage_dir|default(omit) }}"
+      disabled: "{{ item.1.disabled|default(item.0.disabled|default(false)) }}"
+  register: "users_profiles__register_mapped"
   with_subelements:
-    - '{{ users_profiles__list }}'
-    - 'authorized_keys'
+    - "{{ users_profiles__list }}"
+    - "authorized_keys"
     - skip_missing: true
   when: ((item.0.name is defined and item.0.name) and
          ((item.1 is mapping and item.1.key is defined and item.1.key) or
           (item.1 is string and item.1)))
 
 - set_fact:
-    users_profiles__register_authorized_keys: '{{ users_profiles__register_mapped.results
-                                                    |selectattr("ansible_facts", "defined")|list
-                                                    |map(attribute="ansible_facts.register_authorized_keys")|list }}'
+    users_profiles__register_authorized_keys: "{{ users_profiles__register_mapped.results
+                                                    |selectattr('ansible_facts', 'defined')|list
+                                                    |map(attribute='ansible_facts.register_authorized_keys')|list }}"
