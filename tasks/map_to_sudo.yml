@@ -4,8 +4,8 @@
     register_sudo_specs:
       user: "{{ item.0.name }}"
       host: "{{ item.1.host }}"
-      operator: "{{ item.1.operator|default(None) }}"
-      tag: "{{ item.1.tag|default(None) }}"
+      operator: "{{ item.1.operator|d(None) }}"
+      tag: "{{ item.1.tag|d(None) }}"
       command: "{{ item.1.command }}"
   register: "users_profiles__register_mapped_specs"
   with_subelements:

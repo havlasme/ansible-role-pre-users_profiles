@@ -2,12 +2,12 @@
 - name: Map users entires to authorized_keys
   set_fact:
     register_authorized_keys:
-      key: "{{ item.1.key|default(item.1) }}"
+      key: "{{ item.1.key|d(item.1) }}"
       user: "{{ item.0.name }}"
-      exclusive: "{{ item.1.exclusive|default(omit) }}"
-      key_options: "{{ item.1.key_options|default(omit) }}"
-      manage_dir: "{{ item.1.manage_dir|default(omit) }}"
-      disabled: "{{ item.1.disabled|default(item.0.disabled|default(false)) }}"
+      exclusive: "{{ item.1.exclusive|d(omit) }}"
+      key_options: "{{ item.1.key_options|d(omit) }}"
+      manage_dir: "{{ item.1.manage_dir|d(omit) }}"
+      disabled: "{{ item.1.disabled|d(item.0.disabled|d(false)) }}"
   register: "users_profiles__register_mapped"
   with_subelements:
     - "{{ users_profiles__list }}"
