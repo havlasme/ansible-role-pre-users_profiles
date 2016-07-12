@@ -1,5 +1,5 @@
 ---
-- name: Map specs to sudo
+- name: Initialize - Map users_profiles definitions to system_users objects
   set_fact:
     register_system_user:
       name: "{{ item.name }}"
@@ -28,12 +28,13 @@
       uid: "{{ item.uid|d(omit) }}"
       update_password: "{{ item.update_password|d(omit) }}"
       disabled: "{{ item.disabled|d(false) }}"
-  register: "users_profiles__register_mapped"
   with_items:
     - "{{ users_profiles__list }}"
-  when: (item.name is defined and item.name)
+  register: "users_profiles__register_mapped"
+  when: (item.name is defined and item.name|trim)
 
-- set_fact:
+- name: Initialize - Map users_profiles definitions to system_users objects
+  set_fact:
     users_profiles__register_system_users: "{{ users_profiles__register_mapped.results
                                                   |selectattr('ansible_facts', 'defined')|list
                                                   |map(attribute='ansible_facts.register_system_user')|list }}"

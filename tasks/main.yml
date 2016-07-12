@@ -1,4 +1,12 @@
 ---
-- include: "map_to_authorized_keys.yml"
-- include: "map_to_sudo.yml"
-- include: "map_to_system_users.yml"
+- name: Initialize - Map users_profiles definitions to authorized_keys objects
+  include: "init/map_to_authorized_keys.yml"
+  tags: [ "always" ]
+
+- name: Initialize - Map users_profiles definitions to sudo objects
+  include: "init/map_to_sudo.yml"
+  tags: [ "always" ]
+
+- name: Initialize - Map users_profiles definitions to system_users objects
+  include: "init/map_to_system_users.yml"
+  tags: [ "always" ]

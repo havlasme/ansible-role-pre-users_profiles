@@ -1,5 +1,5 @@
 ---
-- name: Map users entires to specs
+- name: Initialize - Map users_profiles definitions to sudo objects
   set_fact:
     register_sudo_specs:
       user: "{{ item.0.name }}"
@@ -7,16 +7,16 @@
       operator: "{{ item.1.operator|d(None) }}"
       tag: "{{ item.1.tag|d(None) }}"
       command: "{{ item.1.command }}"
-  register: "users_profiles__register_mapped_specs"
   with_subelements:
     - "{{ users_profiles__list }}"
     - "sudo"
     - skip_missing: true
-  when: ((item.0.name is defined and item.0.name) and
-         (item.1.host is defined and item.1.host) and
-         (item.1.command is defined and item.1.command))
+  register: "users_profiles__register_mapped_specs"
+  when: ((item.0.name is defined and item.0.name|trim) and
+         (item.1.host is defined and item.1.host|trim) and
+         (item.1.command is defined and item.1.command|trim))
 
-- name: Map specs to sudo
+- name: Initialize - Map users_profiles definitions to sudo objects
   set_fact:
     register_sudo:
       name: "{{ users_profiles__sudo_prefix }}{{ item.name }}{{ users_profiles__sudo_suffix }}"
@@ -25,14 +25,15 @@
                     |map(attribute='ansible_facts.register_sudo_specs')|list
                     |selectattr('user', 'equalto', item.name)|list }}"
       disabled: "{{ ((item.disabled is defined and item.disabled|bool) or (item.sudo is defined and not item.sudo))|ternary(true, false) }}"
-  register: "users_profiles__register_mapped"
   with_items:
     - "{{ users_profiles__list }}"
-  when: ((item.name is defined and item.name) and
+  register: "users_profiles__register_mapped"
+  when: ((item.name is defined and item.name|trim) and
          ((item.sudo is defined) or
           (item.disabled is defined and item.disabled|bool)))
 
-- set_fact:
+- name: Initialize - Map users_profiles definitions to sudo objects
+  set_fact:
     users_profiles__register_sudo: "{{ users_profiles__register_mapped.results
                                           |selectattr('ansible_facts', 'defined')|list
                                           |map(attribute='ansible_facts.register_sudo')|list }}"
