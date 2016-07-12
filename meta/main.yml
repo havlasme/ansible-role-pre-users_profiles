@@ -2,11 +2,11 @@ dependencies: []
 
 galaxy_info:
   author: "Tomáš Havlas"
-  description: "Helper role executed before users_profiles dependencies."
   company: "Raven Systems"
-  issue_tracker_url: "https://github.com/tomashavlas/ansible-role-pre-users_profiles/issues"
+  description: "Helper role executed before users_profiles dependencies."
   license: "BSD"
   min_ansible_version: 2.0
+  issue_tracker_url: "https://github.com/tomashavlas/ansible-role-pre-users_profiles/issues"
   github_branch: "master"
   platforms:
   - name: Debian
