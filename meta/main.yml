@@ -9,14 +9,14 @@ galaxy_info:
   issue_tracker_url: "https://github.com/tomashavlas/ansible-role-pre-users_profiles/issues"
   github_branch: "master"
   platforms:
-  - name: Debian
-    versions:
-      - jessie
-  - name: EL
-    versions:
-      - 7
-  - name: Fedora
-    versions:
-      - 23
+    - name: Debian
+      versions:
+        - jessie
+    - name: EL
+      versions:
+        - 7
+    - name: Fedora
+      versions:
+        - 23
   galaxy_tags:
     - "helper"
